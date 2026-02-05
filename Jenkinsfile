@@ -2,13 +2,12 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
-            steps {
-                dir('src/ATM-dispensers') {
-                    bat 'mvn clean install'
-                }
-            }
-        }
+       stage('Build') {
+    steps {
+        bat 'mvn clean install'
+    }
+}
+
     }
 
     post {
