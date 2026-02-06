@@ -16,14 +16,14 @@ pipeline {
         }
     }
 
-    post {
-        always {
-            emailext(
-                subject: "ATM Jenkins Build Success",
-                body: "Build completed successfully from Jenkins",
-                to: "maneesha9391@gmail.com",
-                from: "maneesha9391@gmail.com"
-            )
-        }
+   post {
+    always {
+        emailext(
+            subject: "Jenkins Build: ${currentBuild.currentResult}",
+            body: "Build completed for ATM project",
+            to: "maneesha9391@gmail.com"
+        )
     }
+}
+
 }
