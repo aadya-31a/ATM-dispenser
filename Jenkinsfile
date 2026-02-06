@@ -18,6 +18,7 @@ pipeline {
 
    post {
     always {
+        success
         emailext(
             subject: "Jenkins Build: ${currentBuild.currentResult}",
             body: "Build completed for ATM project",
