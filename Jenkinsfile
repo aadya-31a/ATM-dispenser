@@ -2,15 +2,9 @@ pipeline {
     agent any
 
     stages {
-        stage('Checkout') {
-            steps {
-                git branch: 'main', url: 'https://github.com/aadya-31a/ATM-dispenser.git'
-            }
-        }
-
         stage('Build') {
             steps {
-                bat 'mvn clean install'
+                echo 'Build triggered from GitHub push 🚀'
             }
         }
     }
@@ -18,17 +12,23 @@ pipeline {
     post {
         success {
             emailext(
-                to: 'maneesha9391@gmail.com',
-                subject: 'Jenkins Build SUCCESS',
-                body: 'Build completed successfully'
+                subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """Build Successful 🎉
+
+Job: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Build URL: ${env.BUILD_URL}""",
+                to: "maneesha9391@gmail.com"
             )
         }
 
         failure {
             emailext(
-                to: 'maneesha9391@gmail.com',
-                subject: 'Jenkins Build FAILED',
-                body: 'Build failed. Check Jenkins'
+                subject: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """Build Failed ❌
+Check console: ${env.BUILD_URL}""",
+                to: "maneesha9391@gmail.com",
+                attachLog: true
             )
         }
     }
