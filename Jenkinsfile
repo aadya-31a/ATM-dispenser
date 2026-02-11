@@ -1,35 +1,32 @@
 pipeline {
-    agent any
+agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Build triggered from GitHub push 🚀'
-            }
+```
+stages {
+    stage('Build') {
+        steps {
+            echo 'Build triggered from GitHub push 🚀'
         }
     }
+}
 
-    post {
-        success {
-            emailext(
-                subject: "✅ SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """Build Successful 🎉
+post {
+    always {
+        emailext(
+            to: 'maneesha9391@gmail.com',
+            subject: "Jenkins Build Notification",
+            body: """Hello Maneesha,
+```
 
-Job: ${env.JOB_NAME}
+Build Status: ${currentBuild.currentResult}
+Job Name: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
-Build URL: ${env.BUILD_URL}""",
-                to: "maneesha9391@gmail.com"
-            )
-        }
 
-        failure {
-            emailext(
-                subject: "❌ FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                body: """Build Failed ❌
-Check console: ${env.BUILD_URL}""",
-                to: "maneesha9391@gmail.com",
-                attachLog: true
-            )
-        }
-    }
+Check console:
+${env.BUILD_URL}
+
+Thank you"""
+)
+}
+}
 }
