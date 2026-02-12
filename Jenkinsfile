@@ -13,6 +13,7 @@ pipeline {
     post {
         always {
             emailext(
+                to: "maneesha9391@gmail.com"
                 subject: "Build ${currentBuild.currentResult}: ${env.ATM-dispensers} #${env.BUILD_NUMBER}",
                 body: """
 Hello Team,
@@ -27,7 +28,7 @@ Please find the build log attached.
 Regards,
 Jenkins CI
 """,
-                to: "maneesha9391@gmail.com",
+                to: "ATM-dispenser@gmail.com",
                 attachLog: true
             )
         }
