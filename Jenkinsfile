@@ -18,12 +18,10 @@ pipeline {
                     body: """Job: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
 Status: ${currentBuild.currentResult}""",
-                    to: 'maneesha9391@gmail.com'
-                
-              to: "ATM-dispensers@gmail.com",
-                attachLog: true
-            )
+                    to: 'ATM-dispensers@gmail.com'
+                )
+            }
         }
     }
 }
-}
+
