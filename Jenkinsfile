@@ -29,7 +29,7 @@ pipeline {
                 body: 'Your Jenkins build failed',
                 to: 'maneesha9391@gmail.com'
              )
-
+                to: "maneesha9391@gmail.com"
                 attachlog: true
             
         }
