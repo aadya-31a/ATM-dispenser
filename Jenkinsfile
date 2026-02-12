@@ -28,6 +28,8 @@ pipeline {
                 subject: 'Build Failed',
                 body: 'Your Jenkins build failed',
                 to: 'maneesha9391@gmail.com'
+
+                attachlog: true
             )
         }
     }
