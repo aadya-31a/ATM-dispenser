@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Starting build..."
+                echo 'Starting build...'
                 bat 'echo Building project'
             }
         }
@@ -12,25 +12,18 @@ pipeline {
 
     post {
         always {
-            emailext(
-                to: "maneesha9391@gmail.com"
-                 subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-                 body: """
-Hello Team,
-
-Build Status : ${currentBuild.currentResult}
-Job Name     : ${env.ATM-dispensers}
-Build No     : ${env.BUILD_NUMBER}
-Build URL    : ${env.BUILD_URL}
-
-Please find the build log attached.
-
-Regards,
-Jenkins CI
-""",
-                to: "ATM-dispensers@gmail.com",
+            script {
+                emailext(
+                    subject: "Build ${currentBuild.currentResult}: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                    body: """Job: ${env.JOB_NAME}
+Build Number: ${env.BUILD_NUMBER}
+Status: ${currentBuild.currentResult}""",
+                    to: 'maneesha9391@gmail.com'
+                
+              to: "ATM-dispensers@gmail.com",
                 attachLog: true
             )
         }
     }
+}
 }
