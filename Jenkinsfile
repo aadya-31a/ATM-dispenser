@@ -2,14 +2,7 @@ pipeline {
     agent any
 
     stages {
-
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/aadya-31a/ATM-dispenser.git'
-            }
-        }
-
-        stage('Build') {
+         stage('Build') {
             steps {
                 echo 'Starting build...'
                 sh 'mvn clean install'
