@@ -1,44 +1,41 @@
 pipeline {
-agent any
+    agent any
 
-stages {
+    stages {
 
-    stage('Checkout') {
-        steps {
-            git branch: 'main', url: 'https://github.com/aadya-31a/ATM-dispenser.git'
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/aadya-31a/ATM-dispenser.git'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                echo 'Starting build...'
+                sh 'mvn clean install'
+            }
         }
     }
 
-    stage('Build') {
-        steps {
-            bat 'mvn clean install'
+    post {
+        always {
+            echo 'ATM dispensers pipeline completed'
+        }
+
+        success {
+            emailext(
+                subject: 'Build Success',
+                body: 'Your Jenkins build was successful',
+                to: 'maneesha9391@gmail.com'
+            )
+        }
+
+        failure {
+            emailext(
+                subject: 'Build Failed',
+                body: 'Your Jenkins build failed',
+                to: 'maneesha9391@gmail.com'
+            )
         }
     }
-}
-
-post {
-    success {
-        emailext (
-            subject: "SUCCESS: Jenkins Build ${env.BUILD_NUMBER}",
-            body: "Build Success\n${env.BUILD_URL}",
-            to: "maneesha9391@gmail.com",
-            attachLog: true
-        )
-    }
-
-    failure {
-        emailext (
-            subject: "FAILED: Jenkins Build ${env.BUILD_NUMBER}",
-            body: "Build Failed\n${env.BUILD_URL}",
-            to: "maneesha9391@gmail.com",
-            attachLog: true
-        )
-    }
-
-    always {
-        echo 'ATM dispensers pipeline completed'
-    }
-}
-
-
 }
