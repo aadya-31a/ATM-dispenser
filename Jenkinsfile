@@ -18,7 +18,7 @@ pipeline {
                     body: """Job: ${env.JOB_NAME}
 Build Number: ${env.BUILD_NUMBER}
 Status: ${currentBuild.currentResult}""",
-                    to: 'ATM-dispensers@gmail.com'
+                    to: 'maneesha9391@gmail.com'
                 )
             }
         }
