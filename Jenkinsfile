@@ -5,7 +5,7 @@ pipeline {
         stage('Build') {
             steps {
                 echo "Starting build..."
-                sh 'echo Building project'
+                bat 'echo Building project'
             }
         }
     }
