@@ -2,36 +2,30 @@ pipeline {
     agent any
 
     stages {
-         stage('Build') {
+        stage('Build') {
             steps {
-                echo 'Starting build...'
-                sh 'mvn clean install'
+                echo 'Build running...'
             }
         }
     }
 
     post {
-        always {
-            echo 'ATM dispensers pipeline completed'
-        }
-
         success {
             emailext(
-                subject: 'Build Success',
-                body: 'Your Jenkins build was successful',
-                to: 'maneesha9391@gmail.com'
-                attachlog: true
+                subject: "SUCCESS: Job ${env.JOB_NAME}",
+                body: "Build Success 😊\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}",
+                to: "maneesha9391@gmail.com",
+                attachLog: true
             )
         }
 
         failure {
             emailext(
-                subject: 'Build Failed',
-                body: 'Your Jenkins build failed',
-                to: 'maneesha9391@gmail.com'
-                attachlog: true
-             )
-            
+                subject: "FAILED: Job ${env.JOB_NAME}",
+                body: "Build Failed ❌",
+                to: "maneesha9391@gmail.com",
+                attachLog: true
+            )
         }
     }
 }
