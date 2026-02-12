@@ -28,7 +28,7 @@ Please find the build log attached.
 Regards,
 Jenkins CI
 """,
-                to: "ATM-dispenser@gmail.com",
+                to: "ATM-dispensers@gmail.com",
                 attachLog: true
             )
         }
