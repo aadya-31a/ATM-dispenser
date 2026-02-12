@@ -20,6 +20,7 @@ pipeline {
                 subject: 'Build Success',
                 body: 'Your Jenkins build was successful',
                 to: 'maneesha9391@gmail.com'
+                attachlog: true
             )
         }
 
@@ -28,9 +29,8 @@ pipeline {
                 subject: 'Build Failed',
                 body: 'Your Jenkins build failed',
                 to: 'maneesha9391@gmail.com'
-             )
-                to: "maneesha9391@gmail.com"
                 attachlog: true
+             )
             
         }
     }
