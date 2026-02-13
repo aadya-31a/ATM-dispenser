@@ -12,8 +12,8 @@ pipeline {
     post {
         success {
             emailext(
-                subject: "SUCCESS: Job ${env.ATM-dispensers}",
-                body: "Build Success 😊\nJob: ${env.ATM-dispenser}\nBuild: ${env.BUILD_NUMBER}",
+                subject: "SUCCESS: Job ${env.JOB_NAME}",
+                body: "Build Success 😊\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}",
                 to: "maneesha9391@gmail.com",
                 attachLog: true
             )
@@ -21,7 +21,7 @@ pipeline {
 
         failure {
             emailext(
-                subject: "FAILED: Job ${env.ATM-dispenser}",
+                subject: "FAILED: Job ${env.JOB_NAME}",
                 body: "Build Failed ❌",
                 to: "maneesha9391@gmail.com",
                 attachLog: true
