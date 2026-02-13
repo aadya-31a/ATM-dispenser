@@ -4,27 +4,28 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Build running...'
+                echo "Build running..."
             }
         }
     }
 
     post {
         success {
-            emailext(
-                subject: "SUCCESS: Job ${env.JOB_NAME}",
-                body: "Build Success 😊\nJob: ${env.JOB_NAME}\nBuild: ${env.BUILD_NUMBER}",
-                to: "maneesha9391@gmail.com",
-                attachLog: true
-            )
-        }
+            emailext (
+                to: 'maneesha9391@gmail.com',
+                subject: "SUCCESS: ${env.JOB_NAME} Build #${env.BUILD_NUMBER}",
+                body: """
+                ✅ Build Successful
 
-        failure {
-            emailext(
-                subject: "FAILED: Job ${env.JOB_NAME}",
-                body: "Build Failed ❌",
-                to: "maneesha9391@gmail.com",
-                attachLog: true
+                Job Name: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                Status: SUCCESS
+                Build URL: ${env.BUILD_URL}
+
+                Please check attached build log.
+                """,
+                attachLog: true,
+                compressLog: true
             )
         }
     }
