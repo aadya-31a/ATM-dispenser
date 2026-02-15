@@ -25,7 +25,6 @@ pipeline {
                 Please check attached build log.
                 """,
                 attachLog: true,
-                compressLog: true
             )
         }
     }
