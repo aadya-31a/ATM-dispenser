@@ -9,14 +9,14 @@ pipeline {
         }
     }
 
-    post {
-        success {
-            emailext(
-                subject: "BUILD SUCCESS",
-                body: "Jenkins build completed successfully",
-                to: "maneesha9391@gmail.com",
-                attachLog: true
-            )
-        }
+  post {
+    always {
+        emailext (
+            to: 'maneesha9391@gmail.com',
+            subject: "Build Status: ${currentBuild.currentResult}",
+            body: "Check attached build log",
+            attachLog: true
+        )
     }
+}
 }
