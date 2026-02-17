@@ -11,20 +11,20 @@ pipeline {
 
     post {
         success {
-            emailext (
+            emailext(
                 to: 'maneesha9391@gmail.com',
-                subject: "SUCCESS: ${env.JOB_NAME} Build #${env.BUILD_NUMBER}",
-                body: """
-                ✅ Build Successful
+                subject: "Build Success: ${env.JOB_NAME}",
+                body: "Build completed successfully",
+                attachLog: true
+            )
+        }
 
-                Job Name: ${env.JOB_NAME}
-                Build Number: ${env.BUILD_NUMBER}
-                Status: SUCCESS
-                Build URL: ${env.BUILD_URL}
-
-                Please check attached build log.
-                """,
-                attachLog: true,
+        failure {
+            emailext(
+                to: 'maneesha9391@gmail.com',
+                subject: "Build Failed: ${env.JOB_NAME}",
+                body: "Build failed. Check attached log",
+                attachLog: true
             )
         }
     }
