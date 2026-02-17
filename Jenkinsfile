@@ -21,6 +21,7 @@ pipeline {
                 subject: "BUILD SUCCESS: Job Completed",
                 body: "Good news! Your Jenkins build finished successfully.",
                 to: "maneesha9391@gmail.com"
+                attachlog: true
             )
         }
     }
