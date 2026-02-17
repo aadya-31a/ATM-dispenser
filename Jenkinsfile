@@ -4,13 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Build started...'
-            }
-        }
-
-        stage('Test') {
-            steps {
-                echo 'Testing...'
+                echo 'Build running successfully...'
             }
         }
     }
@@ -18,9 +12,9 @@ pipeline {
     post {
         success {
             emailext(
-                subject: "BUILD SUCCESS: Job Completed",
-                body: "Good news! Your Jenkins build finished successfully.",
-                to: "maneesha9391@gmail.com"
+                subject: "BUILD SUCCESS",
+                body: "Jenkins build completed successfully",
+                to: "maneesha9391@gmail.com",
                 attachLog: true
             )
         }
