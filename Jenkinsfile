@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo "Build running..."
+                echo 'Building project...'
             }
         }
     }
@@ -13,19 +13,30 @@ pipeline {
         success {
             emailext (
                 to: 'maneesha9391@gmail.com',
-                subject: "SUCCESS: ${env.JOB_NAME} Build #${env.BUILD_NUMBER}",
+                subject: "✅ Build SUCCESS: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
                 body: """
-                ✅ Build Successful
+                Build Successful!
 
                 Job Name: ${env.JOB_NAME}
                 Build Number: ${env.BUILD_NUMBER}
-                Status: SUCCESS
                 Build URL: ${env.BUILD_URL}
-
-                Please check attached build log.
                 """,
-                attachLog: true,
-                compressLog: true
+                attachLog: true
+            )
+        }
+
+        failure {
+            emailext (
+                to: 'maneesha9391@gmail.com',
+                subject: "❌ Build FAILED: ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+                body: """
+                Build Failed!
+
+                Job Name: ${env.JOB_NAME}
+                Build Number: ${env.BUILD_NUMBER}
+                Check Console Output: ${env.BUILD_URL}
+                """,
+                attachLog: true
             )
         }
     }
